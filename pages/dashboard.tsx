@@ -1,8 +1,7 @@
-import React from 'react';
 import { NextPage } from 'next';
-import PostList from '../components/PostList';
-import { Post } from '../types/Post';
 import { posts as mockPosts } from '../data/posts';
+import PostList from '../src/components/PostList';
+import { Post } from '../types/Post';
 
 interface DashboardProps {
   posts: Post[];

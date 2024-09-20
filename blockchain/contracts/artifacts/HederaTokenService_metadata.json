@@ -1,0 +1,226 @@
+{
+	"compiler": {
+		"version": "0.8.27+commit.40a35a09"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "",
+						"type": "bytes"
+					}
+				],
+				"name": "CallResponseEvent",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes",
+						"name": "encodedFunctionSelector",
+						"type": "bytes"
+					}
+				],
+				"name": "redirectForToken",
+				"outputs": [
+					{
+						"internalType": "int256",
+						"name": "responseCode",
+						"type": "int256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "response",
+						"type": "bytes"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"internalType": "int64",
+						"name": "responseCode",
+						"type": "int64"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "serialNumber",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFromNFT",
+				"outputs": [
+					{
+						"internalType": "int64",
+						"name": "responseCode",
+						"type": "int64"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"redirectForToken(address,bytes)": {
+					"params": {
+						"encodedFunctionSelector": "The function selector from the ERC20 interface + the bytes input for the function called",
+						"token": "The token address"
+					},
+					"returns": {
+						"response": "The result of the call that had been encoded and sent for execution.",
+						"responseCode": "The response code for the status of the request. SUCCESS is 22."
+					}
+				},
+				"transferFrom(address,address,address,uint256)": {
+					"params": {
+						"amount": "The amount of tokens to transfer from `from` to `to`",
+						"from": "The account address of the owner of the token, on the behalf of which to transfer `amount` tokens",
+						"to": "The account address of the receiver of the `amount` tokens",
+						"token": "The address of the fungible Hedera token to transfer"
+					},
+					"returns": {
+						"responseCode": "The response code for the status of the request. SUCCESS is 22."
+					}
+				},
+				"transferFromNFT(address,address,address,uint256)": {
+					"params": {
+						"from": "The account address of the owner of `serialNumber` of `token`",
+						"serialNumber": "The NFT serial number to transfer",
+						"to": "The account address of the receiver of `serialNumber`",
+						"token": "The address of the non-fungible Hedera token to transfer"
+					},
+					"returns": {
+						"responseCode": "The response code for the status of the request. SUCCESS is 22."
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"CallResponseEvent(bool,bytes)": {
+					"notice": "Generic event"
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"redirectForToken(address,bytes)": {
+					"notice": "Redirect for token"
+				},
+				"transferFrom(address,address,address,uint256)": {
+					"notice": "Only applicable to fungible tokens"
+				},
+				"transferFromNFT(address,address,address,uint256)": {
+					"notice": "Transfers `serialNumber` of `token` from `from` to `to` using the allowance mechanism. Only applicable to NFT tokens"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/HederaTokenService.sol": "HederaTokenService"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/HederaResponseCodes.sol": {
+			"keccak256": "0x8fb241071e3f99ca11181dcd07ec7934ac40c8b4d9c31428be5478e0697a4435",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://9254e95fe31e42419d4ff79ecbe0bf5453d9052b232d5adb013ef1bab6d67612",
+				"dweb:/ipfs/QmdA7Ne6taK2pXkcDTK6Fr51BZBKqoukTVvFSqwkieAPCv"
+			]
+		},
+		"contracts/HederaTokenService.sol": {
+			"keccak256": "0xba2c955a7a3b386e16ba0a8d5ddb761b7918132ed0c4627236bda4c3cab8b55f",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://63b1f2a4996231cef217595ebec5e654653597eeae46bea622e18d1ed69cecdb",
+				"dweb:/ipfs/QmdtTSdVcezrHHjLwqg2RBorPDKPqjTDiV2wSeqneuyLVR"
+			]
+		},
+		"contracts/IHederaTokenService.sol": {
+			"keccak256": "0x9443b761c7fdad938265c8cd41d709866eecd53f57c948edbd6b96137e71ee8c",
+			"license": "Apache-2.0",
+			"urls": [
+				"bzz-raw://ae5c4f4b2c7141347cc9c217de5314beab796b593b61e5c9f7326cc98bcda4f4",
+				"dweb:/ipfs/QmWNeXSpKD9tnEt4bTXcnQBsN1HJJSNeqbYNr4uQtvGbyx"
+			]
+		}
+	},
+	"version": 1
+}

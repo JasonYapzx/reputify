@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {query} from '../../../../utils/db'
+import { query } from '../../../../utils/db';
 
-export async function GET (req: NextRequest) {
-  try {
-    const { post_id } = await req.json();
+export async function GET (req: NextRequest, params: { id: string }) {
+  try { 
+    const post_id = params.id;
     const user = await query('SELECT * FROM posts WHERE id = ?', [post_id]);
     
     if (!user) {

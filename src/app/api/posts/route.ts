@@ -1,11 +1,10 @@
 import { posts } from '../../../data/posts';
-import { Post } from '@/types/Post';
+import { Post, PostFormDetails } from '@/types/Post';
 import { query } from '@/utils/db';
 import { NextRequest, NextResponse } from 'next/server';
 
-
 export async function GET(req: NextRequest) {
-  // Fetch all posts
+// Fetch all posts
   try {
     const posts = await query('SELECT * FROM posts;');
     
@@ -21,14 +20,10 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { details } = await req.json()
-
-    if (!details?.title || !details?.content) {
-      return NextResponse.json({ message: 'Title and content are required' }, { status: 400 });
-    }
+    const details:PostFormDetails = await req.json()
 
     const result = await query(
-      'INSERT INTO posts (wallet_address) VALUES (?)',
+      'INSERT INTO posts (user_id, content, token, timeframe, prediction_value, prediction_sign) VALUES (?)',
       [details]
     );
     

@@ -16,22 +16,22 @@ const HeroSection = () => {
             <span className="mr-2 text-primary">
               <Badge>New</Badge>
             </span>
-            <span> Design is out now! </span>
+            <span> SoFi Application</span>
           </Badge>
 
           <div className="max-w-screen-md mx-auto text-center text-4xl md:text-6xl font-bold">
             <h1>
-              Experience the
+              Tokenize your
               <span className="text-transparent px-2 bg-gradient-to-r from-[#D247BF] to-primary bg-clip-text">
-                Shadcn
+                reputation
               </span>
-              landing page
+              like never before
             </h1>
           </div>
 
           <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground">
-            {`We're more than just a tool, we're a community of passionate
-            creators. Get access to exclusive resources, tutorials, and support.`}
+            {`We're more than just an anon, we're a community of passionate retail
+            analysts. Get rewarded for all your alpha shared and build an audience with your reputation!`}
           </p>
 
           <div className="space-y-4 md:space-y-0 md:space-x-4">
@@ -63,8 +63,8 @@ const HeroSection = () => {
             className="w-full md:w-[1200px] mx-auto rounded-lg relative rouded-lg leading-none flex items-center border border-t-2 border-secondary  border-t-primary/30"
             src={
               theme === "light"
-                ? "/hero-image-light.jpeg"
-                : "/hero-image-dark.jpeg"
+                ? "/reputify-logo.png"
+                : "/reputify-logo-2.png"
             }
             alt="dashboard"
           />

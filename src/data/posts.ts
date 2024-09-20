@@ -1,15 +1,15 @@
-import { Post } from '../types/Post';
+import { Post } from '../src/types/Post';
 
 
 export const posts: Post[] = [
   {
-    id: 1,
+    id: 0,
     title: 'First Post',
     content: 'This is the content of the first post.',
     author: 'Alice',
   },
   {
-    id: 2,
+    id: 1,
     title: 'Second Post',
     content: 'This is the content of the second post.',
     author: 'Bob',

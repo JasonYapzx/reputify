@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
-import { users } from '../data/users';
-import { User } from '../types/User';
+import { users } from '../../../data/users';
+import { User } from '../../types/User';
 
 const ProfilePage: NextPage = () => {
   const user: User = users[0];

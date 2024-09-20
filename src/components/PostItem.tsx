@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { Post } from '../types/Post';
 
@@ -6,15 +7,18 @@ interface PostItemProps {
 }
 
 const PostItem: React.FC<PostItemProps> = ({ post }) => {
-
-  const post_id = 0
+  const [upvotes, setUpvotes] = useState(0);  
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('');  
+ 
+  const handleUpvote = () => {
+    setUpvotes((prevUpvotes) => prevUpvotes + 1);  // Increment upvote count
+  };
 
   const handleUpvoteClick = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/posts/${post_id}`, {
+      const response = await fetch(`/api/posts/${post.id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,7 +29,9 @@ const PostItem: React.FC<PostItemProps> = ({ post }) => {
       });
 
       const data = await response.json();
+
       console.log(data)
+
       if (response.ok) {
         setMessage(data.message); // User created message from API
       } else {

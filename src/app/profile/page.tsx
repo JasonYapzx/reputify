@@ -1,48 +1,46 @@
+import PostList from "@/components/PostList";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
 import { NextPage } from 'next';
-import { users } from '../../../data/users';
+import { posts } from "../../data/posts";
+import { users } from '../../data/users';
 import { User } from '../../types/User';
 
 const ProfilePage: NextPage = () => {
   const user: User = users[0];
 
   return (
-    <div style={styles.container}>
-      <h1>Profile</h1>
-      <div style={styles.profile}>
-        <img
-          src={user.avatarUrl || '/avatars/default.png'}
-          alt={`${user.name}'s avatar`}
-          style={styles.avatar}
-        />
-        <div style={styles.info}>
+    <div>
+      <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Someone's Profile</CardTitle>
+      </CardHeader>
+      <CardContent>
+      <div>
+      <Avatar>
+      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
+        <div className="flex flex-row space-x-2">
           <h2>{user.name}</h2>
           <p><strong>Email:</strong> {user.email}</p>
           <p>{user.bio}</p>
         </div>
       </div>
+          </CardContent></Card>
+      <PostList posts={posts}/>
     </div>
   );
 };
 
-const styles = {
-  container: {
-    maxWidth: '800px',
-    margin: '0 auto',
-    padding: '2rem',
-  },
-  profile: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  avatar: {
-    width: '150px',
-    height: '150px',
-    borderRadius: '50%',
-    marginRight: '2rem',
-  },
-  info: {
-    flex: 1,
-  },
-};
 
 export default ProfilePage;

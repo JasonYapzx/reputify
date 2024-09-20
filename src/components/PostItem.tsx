@@ -2,6 +2,17 @@
 import React, { useState } from 'react';
 import { Post } from '../types/Post';
 
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 interface PostItemProps {
   post: Post;
 }
@@ -9,8 +20,8 @@ interface PostItemProps {
 const PostItem: React.FC<PostItemProps> = ({ post }) => {
   const [upvotes, setUpvotes] = useState(0);  
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');  
- 
+  const [message, setMessage] = useState('');    
+
   const handleUpvote = () => {
     setUpvotes((prevUpvotes) => prevUpvotes + 1);  // Increment upvote count
   };
@@ -43,24 +54,23 @@ const PostItem: React.FC<PostItemProps> = ({ post }) => {
     setLoading(false);
   };
 
-
-
   return (
-    <div style={styles.postItem}>
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Post title</CardTitle>
+        <CardDescription>Things like topic tags or whatever</CardDescription>
+      </CardHeader>
+      <CardContent>
       <h2>{post.title}</h2>
       <p>{post.content}</p>
       <small>Author: {post.author}</small>
-      <button onClick={handleUpvoteClick}>Upvote</button>
-    </div>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button onClick={handleUpvoteClick} variant="outline">Upvote</Button>
+        <Button>Downvote</Button>
+      </CardFooter>
+    </Card>
   );
-};
-
-const styles = {
-  postItem: {
-    border: '1px solid #ccc',
-    padding: '1rem',
-    marginBottom: '1rem',
-  },
 };
 
 export default PostItem;

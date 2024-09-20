@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { query } from "../../../../utils/db";
 
 // gets user profile
-export async function GET (req: NextRequest) {
-  try {
-    const { user_id } = await req.json();
+export async function GET (req: NextRequest, params: { id: string }) {
+  try { 
+    const user_id = params.id;
     const user = await query('SELECT * FROM users WHERE id = ?', [user_id]);
     
     if (!user) {

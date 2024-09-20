@@ -1,4 +1,3 @@
-import BenefitsSection from "@/components/layout/sections/benefits";
 import CommunitySection from "@/components/layout/sections/community";
 import ContactSection from "@/components/layout/sections/contact";
 import FAQSection from "@/components/layout/sections/faq";
@@ -40,19 +39,19 @@ export const metadata = {
 };
 
 export default function Home() {
-  return (
-    <div className="flex items-center flex-col">
-      <HeroSection />
-      <SponsorsSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <TestimonialSection />
-      <TeamSection />
-      <CommunitySection />
-      <PricingSection />
-      <ContactSection />
-      <FAQSection />
-      <FooterSection />
-    </div>
-  );
+    return (
+        <div className="flex items-center flex-col">
+            <HeroSection />
+            <SponsorsSection />
+            <FeaturesSection />
+            <ServicesSection />
+            <TestimonialSection />
+            <TeamSection />
+            <CommunitySection />
+            <PricingSection />
+            <ContactSection />
+            <FAQSection />
+            <FooterSection />
+        </div>
+    );
 }

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS votes (
   user_id INT NOT NULL,
 
   vote_sign INT NOT NULL, -- 1 for upvotes, -1 for downvote
-  stake_quantity INT NOT NULL,
+  -- stake_quantity INT NOT NULL,
 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   

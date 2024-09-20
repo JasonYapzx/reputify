@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS posts (
   user_id INT NOT NULL,
   content TEXT,
   token VARCHAR(255) NOT NULL,
-  timeframe DATETIME NOT NULL, 
+  timeframe INTEGER NOT NULL, -- seconds time delta 
   prediction_value DECIMAL(10, 2),
   prediction_sign TINYINT,             -- Assuming 1 for positive, 0 for neutral, and -1 for negative predictions
   post_reputation INT DEFAULT 0,

@@ -10,19 +10,18 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { NextPage } from 'next';
 import { posts } from "../../data/posts";
 import { users } from '../../data/users';
 import { User } from '../../types/User';
 
-const ProfilePage: NextPage = () => {
+const ProfilePage  = () => {
   const user: User = users[0];
 
   return (
     <div>
       <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>Someone's Profile</CardTitle>
+        <CardTitle>Someone&apos;s Profile</CardTitle>
       </CardHeader>
       <CardContent>
       <div>

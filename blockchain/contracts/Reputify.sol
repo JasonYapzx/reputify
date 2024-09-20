@@ -27,7 +27,7 @@ contract Reputify is HederaTokenService {
         int response = HederaTokenService.dissociateToken(sender, tokenAddress);
 
         if (response != HederaResponseCodes.SUCCESS) {
-            revert ("Dissociate Failed");
+            revert ("Dissociate Failed");   
         }
     }
 

@@ -5,6 +5,7 @@
     "hardhat": "^2.22.11"
   },
   "dependencies": {
+    "@hashgraph/sdk": "^2.51.0",
     "@openzeppelin/contracts": "^5.0.2"
   }
 }

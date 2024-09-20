@@ -5,6 +5,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
 // Fetch all posts
+
+
   try {
     const posts = await query('SELECT * FROM posts;');
     
@@ -22,6 +24,7 @@ export async function POST(req: NextRequest) {
   try {
     const details:PostFormDetails = await req.json()
 
+    
     const result = await query(
       'INSERT INTO posts (user_id, content, token, timeframe, prediction_value, prediction_sign) VALUES (?)',
       [details]

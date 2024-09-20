@@ -1,16 +1,19 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 
-import { users } from '../../../../data/users';
+import { query } from "../../../../utils/db";
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') {
-    console.log('REACHED USER')
-    res.status(200).json({ data: users[0] });
-  } else if (req.method === 'POST') {
-    console.log('REGISTER USER??')
-    res.status(201).json({ data: users[0] });
-  } else {
-    res.setHeader('Allow', ['GET', 'POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
+// gets user profile
+export async function GET (req: NextRequest) {
+  try {
+    const { user_id } = await req.json();
+    const user = await query('SELECT * FROM users WHERE id = ?', [user_id]);
+    
+    if (!user) {
+      return NextResponse.json({ message: 'Not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ result: user , user_id };
+} catch (error: any) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
+}
 }

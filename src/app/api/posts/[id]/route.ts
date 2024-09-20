@@ -1,18 +1,19 @@
-import { NextResponse } from 'next/server';
-import { posts } from '../../../../data/posts';
+import { NextRequest, NextResponse } from 'next/server';
+import {query} from '../../../../utils/db'
 
-// Define the GET request handler
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-  const postId = params.id;
+export async function GET (req: NextRequest) {
+  try {
+    const { post_id } = await req.json();
+    const user = await query('SELECT * FROM posts WHERE id = ?', [post_id]);
+    
+    if (!user) {
+      return NextResponse.json({ message: 'Not found' }, { status: 404 });
+    }
 
-  // Fetch the post data by ID (in a real app, you'd query a database)
-  const post = posts.find((p) => p.id === parseInt(postId));
-
-  if (!post) {
-    return NextResponse.json({ message: 'Post not found' }, { status: 404 });
-  }
-
-  return NextResponse.json(post, { status: 200 });
+    return NextResponse.json({ result: user , post_id});
+} catch (error: any) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
+}
 }
 
 

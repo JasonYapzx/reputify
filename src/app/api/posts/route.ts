@@ -1,27 +1,37 @@
-import { NextResponse } from 'next/server';
-import { posts } from '../../../data/posts';
+import { query } from '@/utils/db';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+
+export async function GET(req: NextRequest) {
   // Fetch all posts
-  return NextResponse.json(posts);
+  try {
+    const posts = await query('SELECT * FROM posts;');
+    
+    if (!posts) {
+      return NextResponse.json({ message: 'Not found' }, { status: 404 });
+    }
+    
+    return NextResponse.json({result: posts});
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
+  }
 }
 
-export async function POST(req: Request) {
-  const body = await req.json();
-  const { title, content } = body;
+export async function POST(req: NextRequest) {
+  try {
+    const { details } = await req.json()
 
-  if (!title || !content) {
-    return NextResponse.json({ message: 'Title and content are required' }, { status: 400 });
+    if (!details?.title || !details?.content) {
+      return NextResponse.json({ message: 'Title and content are required' }, { status: 400 });
+    }
+
+    const result = await query(
+      'INSERT INTO posts (wallet_address) VALUES (?)',
+      [details]
+    );
+    
+    return NextResponse.json({ result: result};
+  } catch (error: any) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
   }
-
-
-  // TODO: Mock ID generation and post creation
-  const newPost = {
-    id: posts.length + 1,
-    title,
-    content,
-  };
-
-  posts.push(newPost);  // In reality, you'd insert this into a database
-  return NextResponse.json(newPost, { status: 201 });
 }

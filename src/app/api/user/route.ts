@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const user_id = request.nextUrl.searchParams.get('user_id'); // Use .get() to extract the value
     
     const result = await query('SELECT * FROM users WHERE id = ?', [user_id]); // Get the query result
-    const user = result[0]; // Adjust according to the structure of the result
+    const user = result ?? result[0]; // Adjust according to the structure of the result
 
     // Check if user exists
     if (!user) {

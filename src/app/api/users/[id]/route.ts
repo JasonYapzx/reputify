@@ -12,7 +12,7 @@ export async function GET (req: NextRequest, params: { id: string }) {
       return NextResponse.json({ message: 'Not found' }, { status: 404 });
     }
 
-    return NextResponse.json({ result: user , user_id };
+    return NextResponse.json({ result: user , user_id });
 } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });
 }

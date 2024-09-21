@@ -10,6 +10,9 @@ import SponsorsSection from "@/components/layout/sections/sponsors";
 import TeamSection from "@/components/layout/sections/team";
 import TestimonialSection from "@/components/layout/sections/testimonial";
 
+// import initWeb3 from "../(login)/initWeb3";
+import { sendTransaction } from "@/utils/transaction";
+
 export const metadata = {
   title: "Reputify",
   description: "Your reputation tokenized",
@@ -39,19 +42,29 @@ export const metadata = {
 };
 
 export default function Home() {
-    return (
-        <div className="flex items-center flex-col">
-            <HeroSection />
-            <SponsorsSection />
-            <FeaturesSection />
-            <ServicesSection />
-            <TestimonialSection />
-            <TeamSection />
-            <CommunitySection />
-            <PricingSection />
-            <ContactSection />
-            <FAQSection />
-            <FooterSection />
-        </div>
-    );
+  // const provider = initWeb3();
+
+  // const handleClick = async () => {
+  //   const data = await (await provider).stakeTokens();
+  //   console.log(data);
+  // };
+
+  return (
+    <div className="flex items-center flex-col">
+      {/* <button onClick={handleClick} className="w-max h-screen">
+        DSADa
+      </button> */}
+      <HeroSection />
+      <SponsorsSection />
+      <FeaturesSection />
+      <ServicesSection />
+      <TestimonialSection />
+      <TeamSection />
+      <CommunitySection />
+      <PricingSection />
+      <ContactSection />
+      <FAQSection />
+      <FooterSection />
+    </div>
+  );
 }

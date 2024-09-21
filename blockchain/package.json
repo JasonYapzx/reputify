@@ -7,7 +7,7 @@
     "test": "npx hardhat test",
     "local-node": "npx @hashgraph/hedera-local restart -d",
     "compile-token": "npx solc@0.8.20 --abi --bin Reputify.sol",
-    "compile-staking": "npx solc@0.8.20 --abi --bin Lockup.sol"
+    "compile-staking": "npx solc@0.8.20 --abi --bin blockchain/contracts/Lockup.sol"
   },
   "author": "",
   "license": "ISC",

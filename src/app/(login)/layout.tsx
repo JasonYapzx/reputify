@@ -5,6 +5,15 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 const inter = Inter({ subsets: ["latin"] });
 import { NavbarApp } from "@/components/layout/navbarApp";
+// import initWeb3 from "./initWeb3";
+import {
+  sendTransaction,
+  checkIfTransactionsExists,
+  checkIfWalletIsConnected,
+  connectWallet,
+  getHederaContract,
+} from "@/utils/transaction";
+import { connect } from "http2";
 
 export const metadata: Metadata = {
   title: "Shadcn - Landing template",
@@ -16,6 +25,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log(checkIfWalletIsConnected());
+  console.log(connectWallet());
+  console.log(checkIfTransactionsExists());
+  console.log(getHederaContract());
+
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <Providers>

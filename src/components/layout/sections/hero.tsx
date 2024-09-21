@@ -46,8 +46,7 @@ const HeroSection = () => {
               className="w-5/6 md:w-1/4 font-bold"
             >
               <Link
-                href="https://github.com/nobruf/shadcn-landing-page.git"
-                target="_blank"
+                href="https://github.com/JasonYapzx/reputify"
               >
                 Github respository
               </Link>
@@ -63,8 +62,8 @@ const HeroSection = () => {
             className="w-full md:w-[1200px] mx-auto rounded-lg relative rouded-lg leading-none flex items-center border border-t-2 border-secondary  border-t-primary/30"
             src={
               theme === "light"
-                ? "/reputify-logo.png"
-                : "/reputify-logo-2.png"
+                ? "/preview_image_light.PNG"
+                : "/preview_image_dark.PNG"
             }
             alt="dashboard"
           />

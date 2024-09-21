@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 import { NavbarApp } from "@/components/layout/navbarApp";
 
 export const metadata: Metadata = {
-  title: "Shadcn - Landing template",
-  description: "Landing template from Shadcn",
+  title: "Reputify",
+  description: "Your reputation tokenized",
 };
 
 export default function RootLayout({

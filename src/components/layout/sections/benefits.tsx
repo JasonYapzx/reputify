@@ -13,25 +13,19 @@ const benefitList: BenefitsProps[] = [
     icon: "Blocks",
     title: "Build Brand Trust",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur dolores.",
+      "Build trust in your calls, gain an audience",
   },
   {
     icon: "LineChart",
     title: "More Leads",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam, natus consectetur.",
+      "An easier way to connect to your audience, by staking your reputation",
   },
   {
     icon: "Wallet",
     title: "Higher Conversions",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consectetur. A odio velit cum aliquam",
-  },
-  {
-    icon: "Sparkle",
-    title: "Test Marketing Ideas",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur dolores.",
+      "Directly linked to your person reputation, convert your audience easily with the show of your tokens",
   },
 ];
 

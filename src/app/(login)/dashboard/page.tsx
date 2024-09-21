@@ -1,167 +1,82 @@
-"use client";
-import { useWalletAddress } from "@/components/hooks/useWalletAddress";
-import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Post } from "@/types/Post";
-import { User } from "@/types/User";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import PostList from "../../../components/PostList";
-import { posts as initialPosts } from "../../../data/posts";
-import { users } from "../../../data/users";
+import { LastPrice } from "@/components/crypto-charts/price";
+import { PythChart } from "@/components/crypto-charts/pyth-chart";
+import { TokenCommand } from "@/components/crypto-charts/token-command";
+import Dashboard from "@/components/Dashboard";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { getBenchmarkData, getPriceFeedsData } from "@/lib/pyth";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
-const Dashboard = () => {
-    const router = useRouter();
-    const [posts, setPosts] = useState<Post[]>(initialPosts);
-    const [user, setUser] = useState<User>();
-    const walletId = useWalletAddress();
-    const [isVoteModalOpen, setIsVoteModalOpen] = useState(false);
-    const [currentVote, setCurrentVote] = useState<{
-        id: number;
-        type: 1 | -1;
-    } | null>(null);
-    const [stakeAmount, setStakeAmount] = useState<number>(0);
+export const revalidate = 60;
 
-    const openVoteModal = (id: number, type: 1 | -1) => {
-        if (user && id in user.votes) {
-            return;
-        }
-        setCurrentVote({ id, type });
-        setIsVoteModalOpen(true);
-    };
+export default function Home({ searchParams: { ticker } }: { searchParams: { ticker: string } }) {
+  if (!ticker || ticker === "") {
+    redirect("/dashboard?ticker=BTC/USD");
+  }
 
-    function getUserObject(userId: string) {
-        return users.find((user) => user.id == userId);
-    }
+  const benchmarkPromise = getBenchmarkData(ticker);
+  const priceFeedPromise = getPriceFeedsData();
 
-    useEffect(() => {
-        if (walletId) {
-            setUser(getUserObject(walletId));
-        }
-    }, [walletId]);
+  return (
+    <main className="flex h-full py-8 w-full lg:flex-row flex-col items-center justify-center px-4">
+      <div className="w-full">
+        <Dashboard />
+      </div>
+      <Card className="w-full">
+        <CardHeader className="flex flex-row items-start justify-between space-y-0 px-4 md:px-6 py-5 sm:py-6">
+          <div className="flex flex-1 flex-col justify-center gap-1">
+            <ErrorBoundary fallback={<span className="text-sm text-red-600">Error</span>}>
+              <Suspense fallback={<CardTitle>{ticker}</CardTitle>}>
+                <TokenCommand priceFeedData={priceFeedPromise} />
+              </Suspense>
+            </ErrorBoundary>
+            <CardDescription>{ticker} last 30d</CardDescription>
+          </div>
+          <ErrorBoundary fallback={<span className="text-sm text-red-600">Error</span>}>
+            <Suspense fallback={<div className="h-5 w-40 md:h-7 md:w-64 rounded bg-gray-50/10 animate-pulse" />}>
+              <LastPrice benchmark={benchmarkPromise} />
+            </Suspense>
+          </ErrorBoundary>
+        </CardHeader>
+        <CardContent className="px-2 sm:p-6 w-full">
+          <div className="aspect-auto h-[400px] w-full flex-col flex items-center justify-center">
+            <ErrorBoundary fallback={<span className="text-sm text-red-600">Error with Pyth (ticker not found?)</span>}>
+              <Suspense fallback={<ChartSkeleton />}>
+                <PythChart benchmark={benchmarkPromise} />
+              </Suspense>
+            </ErrorBoundary>
+          </div>
+        </CardContent>
+        <CardFooter className="flex-col items-start gap-2 text-sm">
+          <div className="font-medium leading-none">
+            <>
+              Data by{" "}
+              <a href="https://pyth.network/" target="_blank" rel="noopener noreferrer" className="text-green-500">
+                Pyth
+              </a>
+              .
+            </>
+          </div>
+        </CardFooter>
+      </Card>
+    </main>
+  );
+}
 
-    const handleRoute = () => {
-        router.push("/form");
-    };
-
-    const handleVote = () => {
-        if (currentVote && stakeAmount) {
-            setPosts((prevPosts) =>
-                prevPosts.map((post) =>
-                    post.id === currentVote.id
-                        ? {
-                              ...post,
-                              upvotes:
-                                  currentVote.type === 1
-                                      ? post.upvotes + 1
-                                      : post.upvotes,
-                              downvotes:
-                                  currentVote.type === -1
-                                      ? post.downvotes + 1
-                                      : post.downvotes,
-                          }
-                        : post
-                )
-            );
-            setIsVoteModalOpen(false);
-            setStakeAmount(0);
-        }
-
-        // Update user votes
-        if (user && currentVote) {
-            setUser((prevUser) => ({
-                ...prevUser!, // TypeScript asserts prevUser is defined
-                votes: {
-                    ...prevUser!.votes,
-                    [currentVote.id]: {
-                        type: currentVote.type,
-                        stake: stakeAmount,
-                    },
-                },
-            }));
-        }
-    };
-
-    const handleSave = (id: number) => {
-        setUser((prevUser) => {
-            if (!prevUser) return prevUser; // In case prevUser is undefined
-
-            // Check if the id is already in the saved list
-            const isSaved = prevUser!.saved.includes(id);
-            return {
-                ...prevUser,
-                saved: isSaved
-                    ? prevUser!.saved.filter((savedId) => savedId !== id) // Remove id if already saved
-                    : [...prevUser!.saved, id], // Add id if not saved
-            };
-        });
-    };
-
-    const handleShare = (id: number) => {
-        // Implement sharing functionality here
-        console.log(`Sharing post ${id}`);
-    };
-
-    return (
-        <>
-            <div className="max-w-[800px] m-0 p-2">
-                <h1>User Posts Dashboard</h1>
-                <PostList
-                    posts={posts}
-                    handleSave={handleSave}
-                    handleShare={handleShare}
-                    openVoteModal={openVoteModal}
-                    user={user}
-                />
-                <Button onClick={handleRoute}>Create Post</Button>
-            </div>
-            <Dialog open={isVoteModalOpen} onOpenChange={setIsVoteModalOpen}>
-                <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                        <DialogTitle>
-                            {currentVote?.type === 1 ? "Upvote" : "Downvote"}{" "}
-                            this post
-                        </DialogTitle>
-                        <DialogDescription>
-                            Enter the amount of Reputify coins you want to stake
-                            for this {currentVote?.type}.
-                        </DialogDescription>
-                    </DialogHeader>
-                    <div className="grid gap-4 py-4">
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="stake" className="text-right">
-                                Stake
-                            </Label>
-                            <Input
-                                id="stake"
-                                type="number"
-                                value={stakeAmount}
-                                onChange={(e) =>
-                                    setStakeAmount(parseInt(e.target.value, 10))
-                                }
-                                className="col-span-3"
-                                placeholder="Enter stake amount"
-                            />
-                        </div>
-                    </div>
-                    <DialogFooter>
-                        <Button type="submit" onClick={handleVote}>
-                            Confirm Vote
-                        </Button>
-                    </DialogFooter>
-                </DialogContent>
-            </Dialog>
-        </>
-    );
+const ChartSkeleton = () => {
+  return (
+    <div className="h-[400px] w-full flex items-center justify-center animate-pulse">
+      <svg height="240" viewBox="0 0 1176 1474" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M734.994 589.59C734.994 670.991 669.173 736.992 587.994 736.992V884.393C750.352 884.393 881.994 752.392 881.994 589.59C881.994 426.789 750.352 294.787 587.994 294.787C534.473 294.787 484.21 309.121 440.994 334.254C353.1 385.188 293.994 480.456 293.994 589.59V1326.6L426.168 1459.13L440.994 1474V589.59C440.994 508.189 506.815 442.189 587.994 442.189C669.173 442.189 734.994 508.189 734.994 589.59Z"
+          fill="#110F23"
+        />
+        <path
+          d="M588 0C480.891 0 380.498 28.7336 294 78.9342C238.617 111.001 189.019 151.868 147 199.669C55.5156 303.603 0 440.138 0 589.606V1031.81L147 1179.21V589.606C147 458.672 203.779 341.004 294 260.003C336.418 222.002 386.216 192.002 441 172.669C486.942 156.268 536.474 147.402 588 147.402C831.537 147.402 1029 345.404 1029 589.606C1029 833.809 831.537 1031.81 588 1031.81V1179.21C912.783 1179.21 1176 915.21 1176 589.606C1176 264.003 912.783 0 588 0Z"
+          fill="#110F23"
+        />
+      </svg>
+    </div>
+  );
 };
-
-export default Dashboard;

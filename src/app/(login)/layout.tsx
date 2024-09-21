@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <Providers>
-        <body className={cn("min-h-screen bg-background", inter.className)}>
+        <body className={cn("min-h-screen w-full bg-background flex flex-col justify-start items-center", inter.className)}>
           <NavbarApp />
           {children}
         </body>

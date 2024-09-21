@@ -75,7 +75,7 @@ const PostFormDialog: React.FC = () => {
         </DrawerTrigger>
         <DrawerContent className="rounded-t-3xl h-content px-4">
           <DrawerHeader className="text-left">
-            <DrawerTitle>Add Event</DrawerTitle>
+            <DrawerTitle>Create Post</DrawerTitle>
           </DrawerHeader>
           <EventForm />
         </DrawerContent>

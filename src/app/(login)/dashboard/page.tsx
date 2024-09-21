@@ -1,4 +1,5 @@
 "use client";
+import { useContract } from "@/components/hooks/useContract";
 import { useWalletAddress } from "@/components/hooks/useWalletAddress";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,13 +15,10 @@ import { Label } from "@/components/ui/label";
 import { Post } from "@/types/Post";
 import { User } from "@/types/User";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PostList from "../../../components/PostList";
 import { posts as initialPosts } from "../../../data/posts";
 import { users } from "../../../data/users";
-import { Contract } from "ethers";
-import { contractABI, contractAddress } from "@/utils/transaction";
-import { getSigner } from "@dynamic-labs/ethers-v6";
 
 const Dashboard = () => {
     const router = useRouter();
@@ -33,11 +31,12 @@ const Dashboard = () => {
         type: 1 | -1;
     } | null>(null);
     const [stakeAmount, setStakeAmount] = useState<number>(0);
+    const contract = useContract();
     if (!walletId) {
         return null;
     }
-      const signer = await getSigner(walletId);
-    const hederaStake = new Contract(contractAddress, contractABI)
+    //   const signer = await getSigner(walletId);
+    // const hederaStake = new Contract(contractAddress, contractABI)
 
     const openVoteModal = (id: number, type: 1 | -1) => {
         if (user && id in user.votes) {
@@ -61,7 +60,7 @@ const Dashboard = () => {
         router.push("/form");
     };
 
-    const handleVote = () => {
+    const handleVote = async () => {
         if (currentVote && stakeAmount) {
             setPosts((prevPosts) =>
                 prevPosts.map((post) =>
@@ -97,6 +96,18 @@ const Dashboard = () => {
                 },
             }));
         }
+        
+        await contract.then(async(c) => {
+            const res = await c?.getFunction('stake')(1, true, '1');
+            console.log(res);
+        })
+
+        await contract.then(async(c) => {
+            const res = await c?.getFunction('unstake')(1, true, '1');
+            console.log(res);
+        })
+        
+  
     };
 
     const handleSave = (id: number) => {

@@ -1,6 +1,4 @@
-import { useDynamicContext, useIsLoggedIn } from "@dynamic-labs/sdk-react-core";
-import { getWeb3Provider, getSigner } from "@dynamic-labs/ethers-v6";
-import { Contract, Interface, Wallet } from "ethers";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 
 export async function useWalletAddress() {
   const { primaryWallet } = useDynamicContext();

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 // import { contractABI, contractAddress } from "../utils/constants";
 // export const TransactionContext = React.createContext();
-const { ethereum } = window; // we have this because we have metamask
+// const { ethereum } = window; // we have this because we have metamask
 
 export const contractAddress = "0x922932A05d6De78C94eB6CbedB99B72957B752f8"; // EVM-compatible address
 export const contractABI = [

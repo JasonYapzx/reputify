@@ -11,7 +11,7 @@ import TeamSection from "@/components/layout/sections/team";
 import TestimonialSection from "@/components/layout/sections/testimonial";
 
 // import initWeb3 from "../(login)/initWeb3";
-import { sendTransaction } from "@/utils/transaction";
+// import { sendTransaction } from "@/utils/transaction";
 
 export const metadata = {
   title: "Reputify",
@@ -44,9 +44,6 @@ export const metadata = {
 export default function Home() {
   return (
     <div className="flex items-center flex-col">
-      {/* <button onClick={handleClick} className="w-max h-screen">
-        DSADa
-      </button> */}
       <HeroSection />
       <SponsorsSection />
       <FeaturesSection />

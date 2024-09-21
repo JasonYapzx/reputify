@@ -12,6 +12,7 @@ import { ArrowBigDown, ArrowBigUp, Bookmark, Share2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { users } from "../data/users";
 import { Post } from "../types/Post";
+import { useContract } from "./hooks/useContract";
 interface PostItemProps {
   post: Post;
   handleSave: (postId: number) => void;
@@ -33,6 +34,15 @@ const PostItem: React.FC<PostItemProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [poster, setPoster] = useState<User>();
+
+  // console.log(checkIfWalletIsConnected());
+  // console.log(connectWallet());
+  // console.log(checkIfTransactionsExists());
+  // console.log(getHederaContract());
+  // const [contract, setContract] = useState();
+  const contract = useContract();
+
+  
 
   useEffect(() => {
     console.log("Here");

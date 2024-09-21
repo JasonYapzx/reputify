@@ -5,16 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "npx hardhat test",
-    "local-node": "npx @hashgraph/hedera-local restart -d"
+    "local-node": "npx @hashgraph/hedera-local restart -d",
+    "compile-token": "npx solc@0.8.20 --abi --bin Reputify.sol",
+    "compile-staking": "npx solc@0.8.20 --abi --bin Lockup.sol"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hashgraph/sdk": "^2.51.0",
-    "@openzeppelin/contracts": "^5.0.2",
     "@hashgraph/hedera-local": "^2.4.5",
+    "@hashgraph/sdk": "^2.51.0",
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
-    "dotenv": "^16.0.3",
+    "@openzeppelin/contracts": "^5.0.2",
+    "dotenv": "^16.4.5",
     "nvm": "^0.0.4"
   },
   "devDependencies": {

@@ -4,7 +4,7 @@
 import { useAuthToken } from "@/components/hooks/useAuthToken";
 import { useWalletAddress } from "@/components/hooks/useWalletAddress";
 
-export default function wallet() {
+export default function WalletPage() {
     const walletAddress = useWalletAddress();
     const authToken = useAuthToken();
     return (

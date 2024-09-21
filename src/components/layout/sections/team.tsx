@@ -14,8 +14,9 @@ import jasonPP from "../../icons/jason.jpg";
 import jonPP from "../../icons/jonathan.jpg";
 import eugenePP from "../../icons/eugene.jpg";
 import shaunePP from "../../icons/shaune.jpg";
-import jiahuaPP from "../../icons/shaune.jpg";
-
+import jiahuaPP from "../../icons/jiahua.jpg";
+import "slick-carousel/slick/slick.css"; // Import slick-carousel CSS
+import Slider from 'react-slick'
 interface TeamProps {
   imageUrl: StaticImageData;
   firstName: string;
@@ -27,13 +28,18 @@ interface SocialNetworkProps {
   name: string;
   url: string;
 }
+
 const TeamSection = () => {
   const teamList: TeamProps[] = [
     {
       imageUrl: jasonPP,
       firstName: "Jason",
       lastName: "Yap",
-      positions: ["Software Developer", "Blockchain Enthusiast", "AWS Solutions Architect - Associate Certified"],
+      positions: [
+        "Software Developer",
+        "Blockchain Enthusiast",
+        "AWS Solutions Architect - Associate Certified",
+      ],
       socialNetworks: [
         {
           name: "LinkedIn",
@@ -46,11 +52,14 @@ const TeamSection = () => {
       ],
     },
     {
-      imageUrl:
-        jonPP,
+      imageUrl: jonPP,
       firstName: "Jonathan",
       lastName: "Yap",
-      positions: ["Software Evangelist", "Site Reliability Engineer", "AWS Solutions Architect - Associate Certified"],
+      positions: [
+        "Software Evangelist",
+        "Site Reliability Engineer",
+        "AWS Solutions Architect - Associate Certified",
+      ],
       socialNetworks: [
         {
           name: "LinkedIn",
@@ -63,8 +72,7 @@ const TeamSection = () => {
       ],
     },
     {
-      imageUrl:
-        shaunePP,
+      imageUrl: shaunePP,
       firstName: "Shaune",
       lastName: "Ang",
       positions: ["Machine Learning Engineer", "Javascript Champion"],
@@ -80,11 +88,10 @@ const TeamSection = () => {
       ],
     },
     {
-      imageUrl:
-        eugenePP,
+      imageUrl: eugenePP,
       firstName: "Eugene",
       lastName: "Tay",
-      positions: ["Software Developer",  "AWS Developer - Associate Certified"],
+      positions: ["Software Developer", "AWS Developer - Associate Certified"],
       socialNetworks: [
         {
           name: "LinkedIn",
@@ -97,15 +104,18 @@ const TeamSection = () => {
       ],
     },
     {
-      imageUrl:
-        jiahuaPP,
+      imageUrl: jiahuaPP,
       firstName: "Du",
       lastName: "Jia Hua",
       positions: ["DevOps Engineer", "Frontend Mastermind"],
       socialNetworks: [
         {
           name: "LinkedIn",
-          url: "https://www.linkedin.com/in/leopoldo-miranda/",
+          url: "https://sg.linkedin.com/in/du-jiahua",
+        },
+        {
+          name: "Github",
+          url: "https://github.com/edures888",
         },
       ],
     },
@@ -133,59 +143,59 @@ const TeamSection = () => {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {teamList.map(
-          (
-            { imageUrl, firstName, lastName, positions, socialNetworks },
-            index
-          ) => (
-            <Card
-              key={index}
-              className="bg-muted/60 dark:bg-card flex flex-col h-full overflow-hidden group/hoverimg"
-            >
-              <CardHeader className="p-0 gap-0">
-                <div className="h-full overflow-hidden">
-                  <Image
-                    src={imageUrl}
-                    alt=""
-                    width={300}
-                    height={300}
-                    className="w-full aspect-square object-cover saturate-0 transition-all duration-200 ease-linear size-full group-hover/hoverimg:saturate-100 group-hover/hoverimg:scale-[1.01]"
-                  />
-                </div>
-                <CardTitle className="py-6 pb-4 px-6">
-                  {firstName}
-                  <span className="text-primary ml-2">{lastName}</span>
-                </CardTitle>
-              </CardHeader>
-              {positions.map((position, index) => (
-                <CardContent
-                  key={index}
-                  className={`pb-0 text-muted-foreground ${
-                    index === positions.length - 1 && "pb-6"
-                  }`}
-                >
-                  {position}
-                  {index < positions.length - 1 && <span>,</span>}
-                </CardContent>
-              ))}
-
-              <CardFooter className="space-x-4 mt-auto">
-                {socialNetworks.map(({ name, url }, index) => (
-                  <Link
+        <div className="grid grid-cols-3 gap-8">
+          {teamList.map(
+            (
+              { imageUrl, firstName, lastName, positions, socialNetworks },
+              index
+            ) => (
+              <Card
+                key={index}
+                className="bg-muted/60 dark:bg-card flex flex-col h-full overflow-hidden group/hoverimg"
+              >
+                <CardHeader className="p-0 gap-0">
+                  <div className="h-full overflow-hidden">
+                    <Image
+                      src={imageUrl}
+                      alt=""
+                      width={300}
+                      height={300}
+                      className="w-full aspect-square object-cover saturate-0 transition-all duration-200 ease-linear size-full group-hover/hoverimg:saturate-100 group-hover/hoverimg:scale-[1.01]"
+                    />
+                  </div>
+                  <CardTitle className="py-6 pb-4 px-6">
+                    {firstName}
+                    <span className="text-primary ml-2">{lastName}</span>
+                  </CardTitle>
+                </CardHeader>
+                {positions.map((position, index) => (
+                  <CardContent
                     key={index}
-                    href={url}
-                    target="_blank"
-                    className="hover:opacity-80 transition-all"
+                    className={`pb-0 text-muted-foreground ${
+                      index === positions.length - 1 && "pb-6"
+                    }`}
                   >
-                    {socialIcon(name)}
-                  </Link>
+                    {position}
+                    {index < positions.length - 1 && <span>,</span>}
+                  </CardContent>
                 ))}
-              </CardFooter>
-            </Card>
-          )
-        )}
-      </div>
+
+                <CardFooter className="space-x-4 mt-auto">
+                  {socialNetworks.map(({ name, url }, index) => (
+                    <Link
+                      key={index}
+                      href={url}
+                      target="_blank"
+                      className="hover:opacity-80 transition-all"
+                    >
+                      {socialIcon(name)}
+                    </Link>
+                  ))}
+                </CardFooter>
+              </Card>
+            )
+          )}
+        </div>
     </section>
   );
 };

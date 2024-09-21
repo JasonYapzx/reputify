@@ -1,8 +1,32 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['i.pravatar.cc', 'images.unsplash.com', 'avatars.githubusercontent'], 
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent',
+        pathname: '**',
+      },
+    ],
+  },
+  webpack: (config) => {
+    config.module.rules?.push({
+      test: /..\/blockchain\/.*$/,
+      loader: "ignore-loader",
+    });
+    return config;
   },
 }
+
 
 export default nextConfig;

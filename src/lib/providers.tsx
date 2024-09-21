@@ -35,7 +35,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     <DynamicContextProvider
       theme="auto"
       settings={{
-        environmentId: process.env.DYNAMIC_ENV_ID ?? '',
+        environmentId: "c97fa46a-8444-4316-bfc9-b60f10098938",
         walletConnectors: [EthereumWalletConnectors],
         overrides: { evmNetworks },
         events: {

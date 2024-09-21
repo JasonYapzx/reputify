@@ -18,7 +18,7 @@
  *
  */
 
-const { ethers } = require("hardhat");
+import { ethers } from "hardhat";
 
 module.exports = async () => {
   //Assign the first signer, which comes from the first privateKey from our configuration in hardhat.config.js, to a wallet variable.
@@ -28,7 +28,7 @@ module.exports = async () => {
   //name of contract as first parameter
   //wallet/signer used for signing the contract calls/transactions with this contract
   const Lockup = await ethers.getContractFactory("StakingContract", wallet);
-  
+
   //Using already initialized contract factory object with our contract, we can invoke deploy function to deploy the contract.
   //Accepts constructor parameters from our contract
   const reputifyTokenAddress = wallet.address; // Replace with actual token contract address

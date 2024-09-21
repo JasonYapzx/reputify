@@ -18,7 +18,7 @@
  *
  */
 
-const { ethers } = require("hardhat");
+import { ethers } from "hardhat";
 
 //This function accepts two parameters - address and msg
 //Retrieves the contract from the address and set new greeting

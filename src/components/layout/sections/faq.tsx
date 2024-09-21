@@ -13,35 +13,32 @@ interface FAQProps {
 
 const FAQList: FAQProps[] = [
   {
-    question: "Is this template free?",
-    answer: "Yes. It is a free NextJS Shadcn template.",
+    question: "What is Reputify?",
+    answer: "Reputify is a decentralized reputation platform that tracks and evaluates analysts' predictions in various markets, ensuring transparency and accountability through blockchain technology.",
     value: "item-1",
   },
   {
-    question: "Duis aute irure dolor in reprehenderit in voluptate velit?",
-    answer:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore quidem quam consectetur sapiente, iste rerum reiciendis animi nihil nostrum sit quo, modi quod.",
+    question: "How does the staking mechanism work?",
+    answer: "Users can stake tokens on analysts' predictions. If a prediction is correct, both the analyst and their backers receive rewards. If incorrect, stakers lose their stake, which is then awarded to false stakers.",
     value: "item-2",
   },
   {
-    question:
-      "Lorem ipsum dolor sit amet Consectetur natus dolor minus quibusdam?",
-    answer:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore qui nostrum reiciendis veritatis.",
+    question: "How is an analyst's reputation calculated?",
+    answer: "An analyst's reputation is based on their prediction accuracy, community feedback, and engagement metrics. Higher accuracy and positive feedback lead to an increased reputation score.",
     value: "item-3",
   },
   {
-    question: "Excepteur sint occaecat cupidata non proident sunt?",
-    answer: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    question: "What technologies does Reputify use?",
+    answer: "Reputify is built with NextJS for the frontend, HardHat for smart contracts, and deployed on Hedera Token Service and Hedera Smart Contract Service, with wallet authentication provided by Dynamic.",
     value: "item-4",
   },
   {
-    question:
-      "Enim ad minim veniam, quis nostrud exercitation ullamco laboris?",
-    answer: "consectetur adipisicing elit. Sint labore.",
+    question: "Will ChainLink Oracles be integrated into Reputify?",
+    answer: "Yes, ChainLink Oracles will be integrated to capture real-time on-chain data for accurate prediction evaluations, enhancing the platform's reliability.",
     value: "item-5",
   },
 ];
+
 
 const FAQSection = () => {
   return (

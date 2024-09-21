@@ -3,6 +3,7 @@ import { User } from "@/types/User";
 import React from "react";
 import { Post } from "../types/Post";
 import PostItem from "./PostItem";
+import { ScrollArea } from "./ui/scroll-area";
 
 interface PostListProps {
     posts: Post[];
@@ -22,7 +23,7 @@ const PostList: React.FC<PostListProps> = ({
     owner = false,
 }) => {
     return (
-        <div>
+        <ScrollArea className="h-[560px] rounded-md border">
             {posts.map((post) => (
                 <PostItem
                     post={post}
@@ -34,7 +35,7 @@ const PostList: React.FC<PostListProps> = ({
                     owner={owner}
                 />
             ))}
-        </div>
+        </ScrollArea>
     );
 };
 

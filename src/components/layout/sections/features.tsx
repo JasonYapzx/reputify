@@ -13,37 +13,37 @@ const featureList: FeaturesProps[] = [
     icon: "TabletSmartphone",
     title: "Mobile Friendly",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam, consectetur.",
+      "Our site and application is mobile friendly for you to use anytime, anywhere.",
   },
   {
     icon: "BadgeCheck",
     title: "Social Proof",
     description:
-      "Lorem ipsum dolor sit amet consectetur. Natus consectetur, odio ea accusamus aperiam.",
+      "There is a social proof of someone's reputation, the more tokens they have, the better their calls",
   },
   {
     icon: "Goal",
     title: "Targeted Content",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. odio ea accusamus aperiam.",
+      "Follow the creators you want, and get alpha on the things you love.",
   },
   {
     icon: "PictureInPicture",
-    title: "Strong Visuals",
+    title: "Data Visualization",
     description:
-      "Lorem elit. A odio velit cum aliquam. Natus consectetur dolores, odio ea accusamus aperiam.",
+      "Easy to understand and clean data visualization for your trading needs and alpha generation.",
   },
   {
     icon: "MousePointerClick",
-    title: "Clear CTA",
+    title: "Easy of use",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing. odio ea accusamus consectetur.",
+      "Everything away at the click of a button, easily manage and gamble away your reputation!",
   },
   {
     icon: "Newspaper",
-    title: "Clear Headline",
+    title: "Knowledge library",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A odio velit cum aliquam. Natus consectetur.",
+      "Transform this to your online knowledge management portal",
   },
 ];
 
@@ -59,9 +59,7 @@ const FeaturesSection = () => {
       </h2>
 
       <h3 className="md:w-1/2 mx-auto text-xl text-center text-muted-foreground mb-8">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem
-        fugiat, odit similique quasi sint reiciendis quidem iure veritatis optio
-        facere tenetur.
+        We make you bet on your reputation in order to further your reputation, put your money where your mouth is!
       </h3>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -59,7 +59,7 @@ const ProfilePage = () => {
     };
 
     return (
-        <div>
+        <div className="w-full">
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-8 flex items-center space-x-4">
                     <Avatar className="h-20 w-20">

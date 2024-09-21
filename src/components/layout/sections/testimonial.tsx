@@ -27,54 +27,54 @@ interface ReviewProps {
 const reviewList: ReviewProps[] = [
   {
     image: "https://github.com/shadcn.png",
-    name: "John Doe",
-    userName: "Product Manager",
+    name: "Olivia Garcia",
+    userName: "Reputation Analyst",
     comment:
-      "Wow NextJs + Shadcn is awesome!. This template lets me change colors, fonts and images to match my brand identity. ",
+      "The reputation analytics provided by this app helped me predict market trends and offer actionable insights for clients.",
     rating: 5.0,
   },
   {
     image: "https://github.com/shadcn.png",
-    name: "Sophia Collins",
-    userName: "Cybersecurity Analyst",
+    name: "James Miller",
+    userName: "Crypto Analyst",
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna. ",
-    rating: 4.8,
-  },
-
-  {
-    image: "https://github.com/shadcn.png",
-    name: "Adam Johnson",
-    userName: "Chief Technology Officer",
-    comment:
-      "Lorem ipsum dolor sit amet,exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "The app's decentralized reputation system is a game changer. It’s transparent, secure, and builds trust in every transaction.",
     rating: 4.9,
   },
   {
     image: "https://github.com/shadcn.png",
-    name: "Ethan Parker",
-    userName: "Data Scientist",
+    name: "Ella Rodriguez",
+    userName: "Market Strategist",
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod labore et dolore magna aliqua. Ut enim ad minim veniam.",
+      "I love how easy it is to grow my reputation and track my performance. The data visualization tools make complex data understandable.",
+    rating: 4.8,
+  },
+  {
+    image: "https://github.com/shadcn.png",
+    name: "William Thompson",
+    userName: "Financial Analyst",
+    comment:
+      "The audience growth insights have been invaluable. I’ve built a stronger network and reputation in the decentralized finance space.",
     rating: 5.0,
   },
   {
     image: "https://github.com/shadcn.png",
-    name: "Ava Mitchell",
-    userName: "IT Project Manager",
+    name: "Sophia Johnson",
+    userName: "Blockchain Consultant",
     comment:
-      "Lorem ipsum dolor sit amet, tempor incididunt  aliqua. Ut enim ad minim veniam, quis nostrud incididunt consectetur adipiscing elit.",
+      "The clean data visuals and reputation tracking features are exactly what I need to provide my clients with detailed reports.",
     rating: 5.0,
   },
   {
     image: "https://github.com/shadcn.png",
-    name: "Isabella Reed",
-    userName: "DevOps Engineer",
+    name: "Lucas Brown",
+    userName: "Quantitative Analyst",
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Having my predictions tied to a reputation score helps me stand out in the crypto market. This app has given me the edge I need.",
     rating: 4.9,
   },
 ];
+
 
 const TestimonialSection = () => {
   return (

@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 import { NavbarApp } from "@/components/layout/navbarApp";
 
 export const metadata: Metadata = {
-  title: "Shadcn - Landing template",
-  description: "Landing template from Shadcn",
+  title: "Reputify",
+  description: "Your reputation tokenized",
 };
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <Providers>
-        <body className={cn("min-h-screen bg-background", inter.className)}>
+        <body className={cn("min-h-screen w-full bg-background flex flex-col justify-start items-center", inter.className)}>
           <NavbarApp />
           {children}
         </body>

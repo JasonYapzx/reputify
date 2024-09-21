@@ -1,9 +1,5 @@
+import { NounsAvatar } from "@/components/NounsAvatar";
 import PostList from "@/components/PostList";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
 import {
   Card,
   CardContent,
@@ -25,10 +21,11 @@ const ProfilePage  = () => {
       </CardHeader>
       <CardContent>
       <div>
-      <Avatar>
+        <NounsAvatar/>
+      {/* <Avatar>
       <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
       <AvatarFallback>CN</AvatarFallback>
-    </Avatar>
+    </Avatar> */}
         <div className="flex flex-row space-x-2">
           <h2>{user.name}</h2>
           <p><strong>Email:</strong> {user.email}</p>

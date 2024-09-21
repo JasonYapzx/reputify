@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
         const int_result = await query("INSERT INTO users (wallet_address, created_at) VALUES ('paoopwie', DEFAULT)");
 
-        let statement = "SELECT * FROM users;";
+        const statement = "SELECT * FROM users;";
 
         const result = await query(statement);
         

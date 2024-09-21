@@ -3,7 +3,8 @@ export interface Post {
   id: number;
   user_id: number;
   content: string;
-
+  author: string;
+  title: string;
   token: string;
   timeframe: number; // seconds
   prediction_value: number;
@@ -11,7 +12,7 @@ export interface Post {
   post_reputation: number;
   // upvotes: number;
   // downvotes: number;
-  // score: number;
+  score: number;
 }
 
 export interface PostFormDetails {

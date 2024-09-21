@@ -38,7 +38,7 @@ export function TokenCommand(props: TokenCommandProps) {
       <>
         <div className="flex flex-row gap-2 items-center">
           <button className="w-min" onClick={() => setOpen(true)}>
-            <CardTitle className="underline decoration-dashed">{searchParams.get("ticker" ?? "ERROR")}</CardTitle>
+            <CardTitle className="underline decoration-dashed">{searchParams.get("ticker")}</CardTitle>
           </button>
           <span className="hidden md:block">
             <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-xs font-medium text-muted-foreground opacity-100">
@@ -121,7 +121,7 @@ const MobileDrawer = (props: MobileDrawerProps) => {
     >
       <DrawerTrigger asChild>
         <button className="w-min" onClick={() => setOpen(true)}>
-          <CardTitle className="underline decoration-dashed">{searchParams.get("ticker" ?? "ERROR")}</CardTitle>
+          <CardTitle className="underline decoration-dashed">{searchParams.get("ticker")}</CardTitle>
         </button>
       </DrawerTrigger>
       <DrawerContent>

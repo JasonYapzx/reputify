@@ -6,10 +6,11 @@ import PostItem from "./PostItem";
 
 interface PostListProps {
     posts: Post[];
-    handleSave: (postId: number) => void;
-    handleShare: (postId: number) => void;
-    openVoteModal: (id: number, type: 1 | -1) => void;
+    handleSave?: (postId: number) => void;
+    handleShare?: (postId: number) => void;
+    openVoteModal?: (id: number, type: 1 | -1) => void;
     user?: User;
+    owner?: boolean;
 }
 
 const PostList: React.FC<PostListProps> = ({
@@ -18,6 +19,7 @@ const PostList: React.FC<PostListProps> = ({
     handleShare,
     openVoteModal,
     user,
+    owner = false,
 }) => {
     return (
         <div>
@@ -29,6 +31,7 @@ const PostList: React.FC<PostListProps> = ({
                     handleShare={handleShare}
                     openVoteModal={openVoteModal}
                     user={user}
+                    owner={owner}
                 />
             ))}
         </div>

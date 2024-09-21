@@ -40,7 +40,7 @@ const Dashboard = () => {
     };
 
     function getUserObject(userId: string) {
-        return users.find((user) => (user.id = userId));
+        return users.find((user) => user.id == userId);
     }
 
     useEffect(() => {
@@ -97,7 +97,6 @@ const Dashboard = () => {
 
             // Check if the id is already in the saved list
             const isSaved = prevUser!.saved.includes(id);
-            console.log("here");
             return {
                 ...prevUser,
                 saved: isSaved

@@ -42,7 +42,7 @@ const CreateUserForm: React.FC = () => {
     if (Object.keys(validationErrors).length === 0) {
       console.log('Form Data: ', formData);
       // Reset form
-      const response = await fetch('http://localhost:3000/api/users', {
+      const response = await fetch('http://localhost:3000/api/users/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

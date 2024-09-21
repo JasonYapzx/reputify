@@ -15,9 +15,9 @@ import { Post } from "@/types/Post";
 import { User } from "@/types/User";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import PostList from "../../components/PostList";
-import { posts as initialPosts } from "../../data/posts";
-import { users } from "../../data/users";
+import PostList from "../../../components/PostList";
+import { posts as initialPosts } from "../../../data/posts";
+import { users } from "../../../data/users";
 
 const Dashboard = () => {
     const router = useRouter();

@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       [wallet_address]
     );
     
-    return NextResponse.json({ result: result, wallet_address };
+    return NextResponse.json({ result: result, wallet_address })
   } catch (error: any) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }

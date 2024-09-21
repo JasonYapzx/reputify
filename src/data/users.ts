@@ -19,5 +19,14 @@ export const users: User[] = [
         votes: {},
         saved: []
     },
+    {
+        id: "0xb88131667c832B0ad8182f80FbA20D3e1143224b",
+        name: 'Shaune Ang',
+        email: 'abc@123.com',
+        bio: 'Software engineer and blockchain enthusiast.',
+        avatarUrl: '/avatars/alice.png',
+        votes: { 1: { type: 1, stake: 20 }, 0: { type: -1, stake: 20 } },
+        saved: []
+    },
     // Add more users as needed
 ];

@@ -4,22 +4,16 @@ import React, { useState } from 'react';
 
 // Define types for form data and errors
 interface FormData {
-  name: string;
-  email: string;
-  password: string;
+  wallet_address: string;
 }
 
 interface FormErrors {
-  name?: string;
-  email?: string;
-  password?: string;
+  wallet_address?: string;
 }
 
-const SimpleForm: React.FC = () => {
+const CreateUserForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    password: '',
+    wallet_address: '',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -34,23 +28,35 @@ const SimpleForm: React.FC = () => {
 
   const validate = (): FormErrors => {
     const newErrors: FormErrors = {};
-    if (!formData.name) newErrors.name = 'Name is required';
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+    if (!formData.wallet_address) {
+      newErrors.wallet_address = 'Wallet address is required';
+    } else if (!/^0x[a-fA-F0-9]{40}$/.test(formData.wallet_address)) {
+      newErrors.wallet_address = 'Invalid wallet address format';
     }
-    if (!formData.password) newErrors.password = 'Password is required';
     return newErrors;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
       console.log('Form Data: ', formData);
       // Reset form
-      setFormData({ name: '', email: '', password: '' });
+      const response = await fetch('http://localhost:3000/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ wallet_address: formData.wallet_address }), // Send the wallet address in the body
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch users');
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setFormData({ wallet_address: '' });
       setErrors({});
     } else {
       setErrors(validationErrors);
@@ -60,42 +66,16 @@ const SimpleForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="p-4 w-full max-w-md mx-auto">
       <div>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="wallet_address">Wallet Address</label>
         <input
           type="text"
-          id="name"
-          name="name"
-          value={formData.name}
+          id="wallet_address"
+          name="wallet_address"
+          value={formData.wallet_address}
           onChange={handleChange}
-          placeholder="Enter your name"
+          placeholder="Enter your wallet address"
         />
-        {errors.name && <span style={{ color: 'red' }}>{errors.name}</span>}
-      </div>
-
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
-        />
-        {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
-      </div>
-
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Enter your password"
-        />
-        {errors.password && <span style={{ color: 'red' }}>{errors.password}</span>}
+        {errors.wallet_address && <span style={{ color: 'red' }}>{errors.wallet_address}</span>}
       </div>
 
       <button type="submit">Submit</button>
@@ -103,4 +83,4 @@ const SimpleForm: React.FC = () => {
   );
 };
 
-export default SimpleForm;
+export default CreateUserForm;

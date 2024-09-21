@@ -13,8 +13,8 @@ export async function GET(request: NextRequest) {
         const statement = "SELECT * FROM users;";
 
         const result = await query(statement);
-        
-        return NextResponse.json({ result: result});
+
+        return NextResponse.json({ result: result });
     } catch (err) {
         console.log('ERROR: API - ', (err as Error).message);
         const response = {
@@ -23,5 +23,5 @@ export async function GET(request: NextRequest) {
         }
         return NextResponse.json(response, { status: 500 });
     }
-  
+
 }

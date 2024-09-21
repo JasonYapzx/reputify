@@ -1,76 +1,127 @@
 "use client";
-import React, { useState } from 'react';
-import { Post } from '../types/Post';
-
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
 } from "@/components/ui/card";
-
+import { User } from "@/types/User";
+import { ArrowBigDown, ArrowBigUp, Bookmark, Share2 } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { users } from "../data/users";
+import { Post } from "../types/Post";
 interface PostItemProps {
-  post: Post;
+    post: Post;
+    handleSave: (postId: number) => void;
+    handleShare: (postId: number) => void;
+    openVoteModal: (id: number, type: 1 | -1) => void;
+    user?: User;
 }
 
-const PostItem: React.FC<PostItemProps> = ({ post }) => {
-  const [upvotes, setUpvotes] = useState(0);  
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');    
+function getUserObject(userId: string) {
+    return users.find((user) => (user.id = userId));
+}
 
-  const handleUpvote = () => {
-    setUpvotes((prevUpvotes) => prevUpvotes + 1);  // Increment upvote count
-  };
+const PostItem: React.FC<PostItemProps> = ({
+    post,
+    handleSave,
+    handleShare,
+    openVoteModal,
+    user,
+}) => {
+    const [loading, setLoading] = useState(false);
+    const [poster, setPoster] = useState<User>();
 
-  const handleUpvoteClick = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(`/api/posts/${post.id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: 'Alice Smith', // Data to be sent to the API
-        }),
-      });
-
-      const data = await response.json();
-
-      console.log(data)
-
-      if (response.ok) {
-        setMessage(data.message); // User created message from API
-      } else {
-        setMessage(`Error: ${data.message}`);
-      }
-    } catch (error) {
-      setMessage('An error occurred');
-    }
-    setLoading(false);
-  };
-
-  return (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>Post title</CardTitle>
-        <CardDescription>Things like topic tags or whatever</CardDescription>
-      </CardHeader>
-      <CardContent>
-      <h2>{post.title}</h2>
-      <p>{post.content}</p>
-      <small>Author: {post.author}</small>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button onClick={handleUpvoteClick} variant="outline">Upvote</Button>
-        <Button>Downvote</Button>
-      </CardFooter>
-    </Card>
-  );
+    useEffect(() => {
+        console.log("Here");
+        const poster: User | undefined = getUserObject(post.user_id);
+        if (poster) {
+            setPoster(poster);
+        }
+    }, []);
+    return (
+        <Card key={post.id} className="mb-6">
+            <CardHeader className="flex flex-row items-center gap-4">
+                <Avatar>
+                    <AvatarImage src={poster?.avatarUrl} alt={poster?.name} />
+                    <AvatarFallback>{poster?.name[0]}</AvatarFallback>
+                </Avatar>
+                <div>
+                    <h2 className="text-lg font-semibold">{post.title}</h2>
+                    <p className="text-sm text-muted-foreground">
+                        by {poster?.name}
+                    </p>
+                </div>
+            </CardHeader>
+            <CardContent>
+                <p>{post.content}</p>
+            </CardContent>
+            <CardFooter className="flex justify-between">
+                <div className="flex items-center gap-2">
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => openVoteModal(post.id, 1)}
+                    >
+                        <ArrowBigUp
+                            className={`mr-1 h-4 w-4 ${
+                                user &&
+                                user.votes[post.id] &&
+                                user.votes[post.id].type == 1
+                                    ? "fill-current"
+                                    : ""
+                            }`}
+                        />
+                        {post.upvotes}
+                    </Button>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => openVoteModal(post.id, -1)}
+                    >
+                        <ArrowBigDown
+                            className={`mr-1 h-4 w-4 ${
+                                user &&
+                                user.votes[post.id] &&
+                                user.votes[post.id].type == -1
+                                    ? "fill-current"
+                                    : ""
+                            }`}
+                        />
+                        {post.downvotes}
+                    </Button>
+                </div>
+                <div className="flex items-center gap-2">
+                    <Button
+                        variant={"outline"}
+                        size="sm"
+                        onClick={() => handleSave(post.id)}
+                    >
+                        <Bookmark
+                            className={`mr-1 h-4 w-4 ${
+                                user && user?.saved.includes(post.id)
+                                    ? "fill-current"
+                                    : ""
+                            }`}
+                        />
+                        {user && user?.saved.includes(post.id)
+                            ? "Saved"
+                            : "Save"}
+                    </Button>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleShare(post.id)}
+                    >
+                        <Share2 className="mr-1 h-4 w-4" />
+                        Share
+                    </Button>
+                </div>
+            </CardFooter>
+        </Card>
+    );
 };
 
 export default PostItem;

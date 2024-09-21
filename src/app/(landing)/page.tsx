@@ -42,13 +42,6 @@ export const metadata = {
 };
 
 export default function Home() {
-  // const provider = initWeb3();
-
-  // const handleClick = async () => {
-  //   const data = await (await provider).stakeTokens();
-  //   console.log(data);
-  // };
-
   return (
     <div className="flex items-center flex-col">
       {/* <button onClick={handleClick} className="w-max h-screen">

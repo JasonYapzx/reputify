@@ -12,8 +12,15 @@ import {
   checkIfWalletIsConnected,
   connectWallet,
   getHederaContract,
+  contractAddress,
+  contractABI,
 } from "@/utils/transaction";
 import { connect } from "http2";
+import { useState, useEffect } from "react";
+import { IEthereum } from "@dynamic-labs/ethereum";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { useWalletAddress } from "@/components/hooks/useWalletAddress";
+import { Contract } from "ethers";
 
 export const metadata: Metadata = {
   title: "Shadcn - Landing template",
@@ -25,10 +32,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const [ethereum, setEthereum] = useState<IEthereum | null>(null);
+
+
+  useEffect(() => {}, []);
+
+  const [primaryWalletAddress, signer] = useWalletAddress();
   console.log(checkIfWalletIsConnected());
   console.log(connectWallet());
   console.log(checkIfTransactionsExists());
   console.log(getHederaContract());
+
+  const contract = new Contract(contractAddress, contractABI, signer);
+  console.log(contract)
+  console.log(contract.stake(1, true, 1))
 
   return (
     <html lang="pt-br" suppressHydrationWarning>

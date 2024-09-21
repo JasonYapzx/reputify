@@ -1,12 +1,16 @@
 import { useDynamicContext, useIsLoggedIn } from "@dynamic-labs/sdk-react-core";
+import { getWeb3Provider, getSigner } from "@dynamic-labs/ethers-v6";
+import { Contract, Interface, Wallet } from "ethers";
 
-export function useWalletAddress() {
-    const { primaryWallet } = useDynamicContext();
-    const isLoggedIn = useIsLoggedIn();
+export async function useWalletAddress() {
+  const { primaryWallet } = useDynamicContext();
+//   if (!primaryWallet) {
+//     return null;
+//   }
 
-    // if (!isLoggedIn || !primaryWallet) {
-    //     throw new Error('User not logged in');
-    // }
+//   const signer = await getSigner(primaryWallet);
+  //   const contract = new Contract("", new Interface(["function .."]), signer);
 
-    return primaryWallet?.address;
+//   return [primaryWallet?.address, signer];
+return primaryWallet
 }

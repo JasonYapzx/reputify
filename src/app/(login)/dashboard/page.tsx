@@ -18,6 +18,9 @@ import { useEffect, useState } from "react";
 import PostList from "../../../components/PostList";
 import { posts as initialPosts } from "../../../data/posts";
 import { users } from "../../../data/users";
+import { Contract } from "ethers";
+import { contractABI, contractAddress } from "@/utils/transaction";
+import { getSigner } from "@dynamic-labs/ethers-v6";
 
 const Dashboard = () => {
     const router = useRouter();
@@ -30,6 +33,11 @@ const Dashboard = () => {
         type: 1 | -1;
     } | null>(null);
     const [stakeAmount, setStakeAmount] = useState<number>(0);
+    if (!walletId) {
+        return null;
+    }
+      const signer = await getSigner(walletId);
+    const hederaStake = new Contract(contractAddress, contractABI)
 
     const openVoteModal = (id: number, type: 1 | -1) => {
         if (user && id in user.votes) {
@@ -43,11 +51,11 @@ const Dashboard = () => {
         return users.find((user) => (user.id = userId));
     }
 
-    useEffect(() => {
-        if (walletId) {
-            setUser(getUserObject(walletId));
-        }
-    }, [walletId]);
+    // useEffect(() => {
+    //     if (walletId) {
+    //         setUser(getUserObject(walletId));
+    //     }
+    // }, [walletId]);
 
     const handleRoute = () => {
         router.push("/form");

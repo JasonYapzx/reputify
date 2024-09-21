@@ -5,8 +5,8 @@ import { ethers } from "ethers";
 // export const TransactionContext = React.createContext();
 const { ethereum } = window; // we have this because we have metamask
 
-const contractAddress = "0x922932A05d6De78C94eB6CbedB99B72957B752f8"; // EVM-compatible address
-const contractABI = [
+export const contractAddress = "0x922932A05d6De78C94eB6CbedB99B72957B752f8"; // EVM-compatible address
+export const contractABI = [
   {
     inputs: [
       { internalType: "address", name: "tokenAddress", type: "address" },
@@ -193,34 +193,34 @@ const contractABI = [
   },
 ];
 
-export const getHederaContract = () => {
-  const provider = new ethers.providers.Web3Provider(ethereum); // TODO: Use Dynamic
-  const signer = provider.getSigner();
+// export const getHederaContract = () => {
+//   const provider = new ethers.providers.Web3Provider(ethereum); // TODO: Use Dynamic
+//   const signer = provider.getSigner();
 
-  const transactionContract = new ethers.Contract(
-    contractAddress,
-    contractABI,
-    signer
-  );
+//   const transactionContract = new ethers.Contract(
+//     contractAddress,
+//     contractABI,
+//     signer
+//   );
 
-  return transactionContract;
-};
+//   return transactionContract;
+// };
 
-export const checkIfTransactionsExists = async () => {
-  try {
-    if (ethereum) {
-      const transactionsContract = getEthereumContract();
-      const currentTransactionCount =
-        await transactionsContract.getTransactionCount();
-      console.log(currentTransactionCount);
-      // window.localStorage.setItem("transactionCount", currentTransactionCount);
-    }
-  } catch (error) {
-    console.log(error);
+// export const checkIfTransactionsExists = async () => {
+//   try {
+//     if (ethereum) {
+//       const transactionsContract = getEthereumContract();
+//       const currentTransactionCount =
+//         await transactionsContract.getTransactionCount();
+//       console.log(currentTransactionCount);
+//       // window.localStorage.setItem("transactionCount", currentTransactionCount);
+//     }
+//   } catch (error) {
+//     console.log(error);
 
-    throw new Error("No ethereum object");
-  }
-};
+//     throw new Error("No ethereum object");
+//   }
+// };
 
 export const checkIfWalletIsConnected = () => {
   if (!ethereum) return alert("Please connect to a metamask wallet");
@@ -242,27 +242,27 @@ export const checkIfWalletIsConnected = () => {
 //   };
 
 // TODO: Check Dynamic wallet connection
-export const connectWallet = async () => {
-  try {
-    if (!ethereum) return alert("Please connect to a metamask wallet");
+// export const connectWallet = async () => {
+//   try {
+//     if (!ethereum) return alert("Please connect to a metamask wallet");
 
-    const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-    setcurrentAccount(accounts[0]);
-    window.location.reload();
-  } catch (error) {
-    console.log(error);
-    throw new Error("No ethereum object");
-  }
-};
+//     const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+//     setcurrentAccount(accounts[0]);
+//     window.location.reload();
+//   } catch (error) {
+//     console.log(error);
+//     throw new Error("No ethereum object");
+//   }
+// };
 
-export const sendTransaction = async (
-  amount: number,
-  isPositive: Boolean,
-  postId: number
-) => {
-  try {
-    if (!ethereum) return alert("Please connect to a metamask wallet");
-    const transactionContract = getEthereumContract();
+// export const sendTransaction = async (
+//   amount: number,
+//   isPositive: Boolean,
+//   postId: number
+// ) => {
+//   try {
+//     if (!ethereum) return alert("Please connect to a metamask wallet");
+//     const transactionContract = getEthereumContract();
 
     // await ethereum.request({ //used to send ethereum from one address to another
     //     method: 'eth_sendTransaction',
@@ -274,14 +274,14 @@ export const sendTransaction = async (
     //     }]
     // })
 
-    const transactionHash = await transactionContract.stake(
-      amount,
-      isPositive,
-      postId
-    );
-    console.log(transactionHash);
-  } catch (error) {
-    console.log(error);
-    throw new Error("Stake failed");
-  }
-};
+//     const transactionHash = await transactionContract.stake(
+//       amount,
+//       isPositive,
+//       postId
+//     );
+//     console.log(transactionHash);
+//   } catch (error) {
+//     console.log(error);
+//     throw new Error("Stake failed");
+//   }
+// };

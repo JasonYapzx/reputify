@@ -19,8 +19,11 @@
  */
 
 import { ethers } from "hardhat";
+import dotenv from "dotenv";
 
 module.exports = async () => {
+  const envFilePath = "../.env";
+  dotenv.config({ path: envFilePath });
   //Assign the first signer, which comes from the first privateKey from our configuration in hardhat.config.js, to a wallet variable.
   let wallet = (await ethers.getSigners())[0];
 
@@ -31,8 +34,8 @@ module.exports = async () => {
 
   //Using already initialized contract factory object with our contract, we can invoke deploy function to deploy the contract.
   //Accepts constructor parameters from our contract
-  const reputifyTokenAddress = wallet.address; // Replace with actual token contract address
-  const ownerAddress = wallet.address;
+  const reputifyTokenAddress = process.env.TOKEN_ID;
+  const ownerAddress = wallet; //TODO: this should be whole calls the function
   const lockup = await Lockup.deploy(reputifyTokenAddress, ownerAddress); // TODO
 
   //We use wait to receive the transaction (deployment) receipt, which contains contractAddress
